@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Inter } from "next/font/google";
 import { Moon, Sun } from "lucide-react";
 import "./globals.css"; // Import global styles
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,20 +33,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" className={inter.className}>
-      <body className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-all">
-        {/* ✅ Header with Dark Mode Toggle */}
-        <header className="absolute top-4 right-4">
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="p-2 rounded-full bg-gray-300 dark:bg-gray-800 hover:bg-gray-400 dark:hover:bg-gray-600 transition-all"
-          >
-            {darkMode ? <Sun size={20} className="text-yellow-400" /> : <Moon size={20} className="text-gray-900" />}
-          </button>
+    <body className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-all">
+      {/* ✅ Make sure the parent container allows absolute positioning */}
+      <div className="relative min-h-screen">
+        {/* ✅ Fixed Header Position */}
+        <header className="fixed top-4 right-4 z-50">
+          <DarkModeToggle />
         </header>
 
-        {/* ✅ Render Page Content */}
-        <div className="min-h-screen flex flex-col">{children}</div>
-      </body>
-    </html>
+        {/* ✅ Ensure content doesn't get covered */}
+        <main className="main-content">{children}</main>
+      </div>
+    </body>
+  </html>
   );
 }
