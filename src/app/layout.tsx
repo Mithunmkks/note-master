@@ -38,8 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <div className="relative min-h-screen">
         {/* ✅ Fixed Header Position */}
         <header className="fixed top-4 right-4 z-50">
-          <DarkModeToggle />
-        </header>
+  <DarkModeToggle />
+</header>
+
 
         {/* ✅ Ensure content doesn't get covered */}
         <main className="main-content">{children}</main>
